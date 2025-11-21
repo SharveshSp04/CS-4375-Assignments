@@ -1,0 +1,15 @@
+# Question 1
+E_agg = E[(1/M ∑ϵ_i)²] 
+      = 1/M² E[∑ϵ_i² + ∑∑_{i≠j} ϵ_iϵ_j]
+      = 1/M² [∑E(ϵ_i²) + ∑∑_{i≠j} E(ϵ_iϵ_j)]
+      = 1/M² [∑E(ϵ_i²) + 0]  (since E(ϵ_iϵ_j)=0 for i≠j)
+      = 1/M² ∑E(ϵ_i²)
+      = 1/M * (1/M ∑E(ϵ_i²))
+      = 1/M * E_avg
+
+# Question 2 
+Using Jensen's inequality with f(x)=x² (convex function):
+E_agg = E[(1/M ∑ϵ_i)²] ≤ E[1/M ∑ϵ_i²] = 1/M ∑E(ϵ_i²) = E_avg
+
+# Question 3
+The training error for AdaBoost is bounded by exp(-2∑γ_t²), which follows from the exponential weight update and the link between the voting weights and error rate.
