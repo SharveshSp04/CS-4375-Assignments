@@ -2,16 +2,6 @@ CS 4375 - ASSIGNMENT 3 - PART I
 THEORETICAL SOLUTIONS
 ==================================================
 
-GROUP MEMBERS:
-- [Your Name]
-- [Partner's Name (if applicable)]
-
-FILES INCLUDED:
-- part_I_solutions.txt (this file)
-- part_I_theoretical_solutions.py
-- part_I_detailed_explanations.py 
-- part_I_summary.py
-
 OVERVIEW:
 This document contains complete theoretical solutions for Assignment 3 Part I,
 covering ensemble methods including bagging and AdaBoost.
