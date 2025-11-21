@@ -1,15 +1,65 @@
-# Question 1
-E_agg = E[(1/M ∑ϵ_i)²] 
-      = 1/M² E[∑ϵ_i² + ∑∑_{i≠j} ϵ_iϵ_j]
-      = 1/M² [∑E(ϵ_i²) + ∑∑_{i≠j} E(ϵ_iϵ_j)]
-      = 1/M² [∑E(ϵ_i²) + 0]  (since E(ϵ_iϵ_j)=0 for i≠j)
-      = 1/M² ∑E(ϵ_i²)
-      = 1/M * (1/M ∑E(ϵ_i²))
-      = 1/M * E_avg
+# CS 4375 - Assignment 3 - Part I
+# Theoretical Solutions File
 
-# Question 2 
-Using Jensen's inequality with f(x)=x² (convex function):
-E_agg = E[(1/M ∑ϵ_i)²] ≤ E[1/M ∑ϵ_i²] = 1/M ∑E(ϵ_i²) = E_avg
+def display_solutions():
+    """Display the theoretical solutions for Part I"""
+    
+    print("=" * 70)
+    print("CS 4375 - ASSIGNMENT 3 - PART I SOLUTIONS")
+    print("=" * 70)
+    
+    # Question 1
+    print("\n" + "=" * 50)
+    print("QUESTION 1: Bagging Error Analysis")
+    print("=" * 50)
+    print("""
+PROOF SUMMARY:
+E_agg = E[(1/M * Σ h_i(x) - f(x))²]
+     = E[(1/M * Σ (f(x) - ε_i(x)) - f(x))²]
+     = E[(-1/M * Σ ε_i(x))²]
+     = 1/M² * E[(Σ ε_i(x))²]
+     = 1/M² * [Σ E[ε_i²] + ΣΣ E[ε_iε_j]]  (expand square)
+     = 1/M² * Σ E[ε_i²]  (since E[ε_iε_j] = 0 for i ≠ j)
+     = 1/M * E_avg
 
-# Question 3
-The training error for AdaBoost is bounded by exp(-2∑γ_t²), which follows from the exponential weight update and the link between the voting weights and error rate.
+Key Insight: Uncorrelated errors eliminate cross-terms, reducing error by factor M.
+""")
+    
+    # Question 2
+    print("\n" + "=" * 50)
+    print("QUESTION 2: Jensen's Inequality Application")
+    print("=" * 50)
+    print("""
+PROOF SUMMARY:
+Using Jensen's inequality for convex function f(x) = x²:
+[(1/M) * Σ ε_i]² ≤ (1/M) * Σ ε_i²
+
+Take expectation:
+E[(1/M * Σ ε_i)²] ≤ E[(1/M) * Σ ε_i²]
+E_agg ≤ (1/M) * Σ E[ε_i²] = E_avg
+
+Key Insight: Even with correlated errors, aggregated model is never worse than average individual model.
+""")
+    
+    # Question 3
+    print("\n" + "=" * 50)
+    print("QUESTION 3: AdaBoost Training Error Bound")
+    print("=" * 50)
+    print("""
+PROOF SUMMARY:
+1. Final weight: D_{T+1}(i) = (1/N) * exp(-y_i Σ α_t h_t(x_i)) / Π Z_t
+2. Error indicator: [H(x_i) ≠ y_i] ≤ exp(-y_i Σ α_t h_t(x_i))
+3. Training error ≤ (1/N) * Σ exp(-y_i Σ α_t h_t(x_i)) = Π Z_t
+4. Z_t = (1-ε_t)e^{-α_t} + ε_t e^{α_t} = 2√(ε_t(1-ε_t)) = √(1-4γ_t²)
+5. Bound: √(1-4γ_t²) ≤ exp(-2γ_t²)
+6. Therefore: Training error ≤ exp(-2 Σ γ_t²)
+
+Key Insight: AdaBoost training error decreases exponentially with number of weak learners.
+""")
+    
+    print("\n" + "=" * 70)
+    print("END OF PART I SOLUTIONS")
+    print("=" * 70)
+
+if __name__ == "__main__":
+    display_solutions()
